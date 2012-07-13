@@ -17,15 +17,12 @@ import static junit.framework.Assert.assertTrue;
 public class MenuControlTest
 {
     @Test
-    public void displayWelcomeMessageTest()
+    public void displayWelcomeMessageAndMenuTest()
     {
         Assert.assertTrue(MenuControl.welcomeMessage().contains("Welcome"));
-    }
-    @Test
-    public void displayMenuTest()
-    {
         Assert.assertTrue(MenuControl.welcomeMessage().contains("Menu"));
     }
+
     @Test
     public void customerSelectsValidOptionFromMenuTest()
     {

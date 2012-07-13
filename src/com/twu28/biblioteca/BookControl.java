@@ -18,7 +18,6 @@ public class BookControl {
         createBooks();
     }
 
-
     public void createBooks() {
         book.put(1,new Book(1,"Eat, Pray, Love", "Elizabeth Gilbert"));
         book.put(2,new Book(2,"One moment","McBride Kristina"));
