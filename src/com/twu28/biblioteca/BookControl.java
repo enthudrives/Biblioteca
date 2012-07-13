@@ -11,25 +11,21 @@ import java.util.Map;
  * To change this template use File | Settings | File Templates.
  */
 public class BookControl {
-    Map<Integer, Book> book;
-    public BookControl()
-    {
-        book  = new HashMap<Integer, Book>();
-        createBooks();
-    }
 
-    public void createBooks() {
+    static Map<Integer, Book> book= new HashMap<Integer, Book>();  //Using ISDN as key to store books
+
+    public static void createBooks() {
         book.put(1,new Book(1,"Eat, Pray, Love", "Elizabeth Gilbert"));
         book.put(2,new Book(2,"One moment","McBride Kristina"));
         book.put(3,new Book(3,"The power of Habit","Duhigg Charles"));
     }
 
-    public String reserveBook(int isdn)
+    public static String reserveBook(int isdn)
     {
         String message= "Sorry we don't have that book yet.";
-        if(book.containsKey(isdn))
+        if(book.containsKey(isdn))         //If that book exists in our library
         {
-            if(book.get(isdn).isAvailable())
+            if(book.get(isdn).isAvailable())     //If it is currently available
             {
                 book.get(isdn).setAvailable(false);
                 message="Thank You! Enjoy the Book.";
@@ -38,7 +34,7 @@ public class BookControl {
         return  message;
     }
 
-    public String getBooks() {
+    public static String getBooks() {
         String booklist="";
         for(Book b:book.values())
         {

@@ -11,10 +11,9 @@ import java.util.Scanner;
  */
 
 public class MenuControl {
-    static BookControl b;
     public static void loadScreen()
     {
-        b=new BookControl();
+        BookControl.createBooks();
         while (true)
         {
         System.out.println(welcomeMessage());
@@ -22,18 +21,18 @@ public class MenuControl {
         choice=selectMenuOption(choice); //validate choice
         switch (choice)
         {
-            case 1:
-                System.out.println(b.getBooks());
+            case 1: //View Books
+                System.out.println(BookControl.getBooks());
                 break;
-            case 2:
+            case 2: //Reserve Book
                 System.out.print("Enter the ISDN :");
                 choice= readChoice();
-                System.out.println(b.reserveBook(choice));
+                System.out.println(BookControl.reserveBook(choice));
                 break;
-            case 3:
+            case 3: //Check Library number
                 System.out.println(Biblioteca.checkLibraryNumber());
                 break;
-            case 4:
+            case 4: //Exit
                 System.exit(1);
                 break;
         }
