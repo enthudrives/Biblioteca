@@ -19,16 +19,18 @@ public class BookControlTest {
     @Test
     public void viewAllBooksTest()
     {
-        BookControl.createBooks();
+        BookControl b=new BookControl();
+        b.createBooks();
         String expected="1. Eat, Pray, Love, by Elizabeth Gilbert\n2. One moment, by McBride Kristina\n3. The power of Habit, by Duhigg Charles\n";
-        Assert.assertEquals(BookControl.getBooks(), expected);
+        Assert.assertEquals(b.getBooks(), expected);
     }
     @Test
     public void reserveBookTest()
     {
-        BookControl.createBooks();
-        Assert.assertEquals(BookControl.reserveBook(3),"Thank You! Enjoy the Book.");
-        Assert.assertEquals(BookControl.reserveBook(3),"Sorry we don't have that book yet.");
+        BookControl b=new BookControl();
+        b.createBooks();
+        Assert.assertEquals(b.reserveBook(3),"Thank You! Enjoy the Book.");
+        Assert.assertEquals(b.reserveBook(3),"Sorry we don't have that book yet.");
     }
 
 }
