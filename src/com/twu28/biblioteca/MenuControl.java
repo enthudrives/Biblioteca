@@ -11,29 +11,29 @@ import java.util.Scanner;
  */
 
 public class MenuControl {
-    BookControl library=new BookControl();
+    BookControl bookControl =new BookControl();
+    String successMessage="Thank You! Enjoy the Book.";
+    String failureMessage="Sorry we don't have that book yet.";
     public void loadScreen()
     {
-        library.createBooks();
+        bookControl.createBooks();
         while (true)
         {
         System.out.println(welcomeMessage());
         int choice=readChoice();
-        choice=selectMenuOption(choice); //validate choice
+        choice= validateMenuOption(choice);
         switch (choice)
         {
-            case 1: //View Books
-                System.out.println(library.getBooks());
+            case 1:
+                System.out.println(bookControl.getBooksNames());
                 break;
-            case 2: //Reserve Book
-                System.out.print("Enter the ISDN :");
-                choice= readChoice();
-                System.out.println(library.reserveBook(choice));
+            case 2:
+                reserveBook();
                 break;
-            case 3: //Check Library number
+            case 3:
                 System.out.println(Biblioteca.checkLibraryNumber());
                 break;
-            case 4: //Exit
+            case 4:
                 System.exit(1);
                 break;
         }
@@ -41,29 +41,37 @@ public class MenuControl {
 
     }
 
-    private static int readChoice() {
+     void reserveBook() {
+        System.out.print("Enter the ISDN :");
+        int choice= readChoice();
+       System.out.println(bookControl.reserveBook(choice,successMessage,failureMessage));
+    }
+
+    int readChoice() {
+
         int choice=0;
         try
         {
         choice= new Scanner(System.in).nextInt();
+
         }
         catch (Exception e)
         {}
         return choice;
     }
 
-    public static String welcomeMessage()
+    public String welcomeMessage()
     {
         return "\n-----------------------------\n\tWelcome to Biblioteca\n-----------------------------\n Menu:\n 1. View books\n 2.Reserve \n 3.Check Library number \n 4.Exit\n Enter your choice :";
     }
 
-    public static int selectMenuOption(int option) {
+    public int validateMenuOption(int option) {
         int selected=option;
         if((selected>4)||(selected<1))
         {
             System.out.println(" Select a valid option!");
-            selected=0; //Returns 0 if invalid option is chosen
+            selected=0;
         }
-        return selected;  //To change body of created methods use File | Settings | File Templates.
+        return selected;
     }
 }

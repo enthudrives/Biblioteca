@@ -2,9 +2,13 @@ package com.twu28.biblioteca;
 
 import junit.framework.Assert;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotSame;
+import static org.mockito.Mockito.*;
 
 
 /**
@@ -16,20 +20,42 @@ import static junit.framework.Assert.assertTrue;
  */
 public class MenuControlTest
 {
+
     @Test
-    public void displayWelcomeMessageAndMenuTest()
+    public void shouldDisplayWelcomeMessageAndMenuTest()
     {
-        Assert.assertTrue(MenuControl.welcomeMessage().contains("Welcome"));
-        Assert.assertTrue(MenuControl.welcomeMessage().contains("Menu"));
+        String message=new MenuControl().welcomeMessage();
+        Assert.assertTrue(message.contains("Welcome") && message.contains("Menu"));
     }
 
     @Test
     public void customerSelectsValidOptionFromMenuTest()
     {
-        int option=5; //Change value to test
-        int expected=option;
-        if((option<1)||(option>4))
-            expected=0; //If option is invalid, 0 is returned.
-        assertEquals(MenuControl.selectMenuOption(option), expected);
+        MenuControl menuControl=mock(MenuControl.class);
+        when(menuControl.readChoice()).thenReturn(1);
+        assertNotSame((new MenuControl().validateMenuOption(menuControl.readChoice())), 0);
+        verify(menuControl).readChoice();
     }
+
+    @Test
+    public void customerSelectsInvalidOptionFromMenuTest()
+    {
+        MenuControl menuControl=mock(MenuControl.class);
+        when(menuControl.readChoice()).thenReturn(5);
+        assertEquals((new MenuControl().validateMenuOption(menuControl.readChoice())), 0);
+        verify(menuControl).readChoice();
+    }
+
+ /*   @Test
+    public void shouldDisplyBookNamesWhenUserSelectsOneTest()
+    {
+        MenuControl menuControl=mock(MenuControl.class);
+        when(menuControl.readChoice()).thenReturn(1);
+        assertNotSame((new MenuControl().validateMenuOption(menuControl.readChoice())), 0);
+        menuControl.loadScreen(); //This didnot invoke the actual loadScreen module.
+        verify(menuControl).readChoice();
+
+    }
+   */
+
 }

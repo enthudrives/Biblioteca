@@ -20,21 +20,20 @@ public class BookControl {
         book.put(3,new Book(3,"The power of Habit","Duhigg Charles"));
     }
 
-    public String reserveBook(int isdn)
+    public String reserveBook(int isdn, String successMessage, String failureMessage)
     {
-        String message= "Sorry we don't have that book yet.";
-        if(book.containsKey(isdn))         //If that book exists in our library
+        if(book.containsKey(isdn))
         {
-            if(book.get(isdn).isAvailable())     //If it is currently available
+            if(book.get(isdn).isAvailable())
             {
                 book.get(isdn).setAvailable(false);
-                message="Thank You! Enjoy the Book.";
+                return successMessage;
             }
         }
-        return  message;
+        return  failureMessage;
     }
 
-    public String getBooks() {
+    public String getBooksNames() {
         String booklist="";
         for(Book b:book.values())
         {
