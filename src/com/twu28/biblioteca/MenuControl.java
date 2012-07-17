@@ -22,10 +22,16 @@ public class MenuControl {
         System.out.println(welcomeMessage());
         int choice=readChoice();
         choice= validateMenuOption(choice);
+        performActionBasedOnChoice(choice);
+        }
+
+    }
+
+    void performActionBasedOnChoice(int choice) {
         switch (choice)
         {
             case 1:
-                System.out.println(bookControl.getBooksNames());
+                displayAllBooksNames();
                 break;
             case 2:
                 reserveBook();
@@ -37,11 +43,13 @@ public class MenuControl {
                 System.exit(1);
                 break;
         }
-        }
-
     }
 
-     void reserveBook() {
+    void displayAllBooksNames() {
+        System.out.println(bookControl.getBooksNames());
+    }
+
+    void reserveBook() {
         System.out.print("Enter the ISDN :");
         int choice= readChoice();
        System.out.println(bookControl.reserveBook(choice,successMessage,failureMessage));

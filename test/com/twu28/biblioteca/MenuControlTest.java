@@ -46,16 +46,16 @@ public class MenuControlTest
         verify(menuControl).readChoice();
     }
 
- /*   @Test
+    @Test
     public void shouldDisplyBookNamesWhenUserSelectsOneTest()
     {
         MenuControl menuControl=mock(MenuControl.class);
         when(menuControl.readChoice()).thenReturn(1);
-        assertNotSame((new MenuControl().validateMenuOption(menuControl.readChoice())), 0);
-        menuControl.loadScreen(); //This didnot invoke the actual loadScreen module.
+        new MenuControl().performActionBasedOnChoice(menuControl.readChoice());
         verify(menuControl).readChoice();
+        //verify(menuControl).displayAllBooksNames();
 
     }
-   */
+
 
 }
