@@ -63,8 +63,7 @@ public class MenuControlTest
         doReturn(2).when(menuControlSpy).readChoice();
         doReturn(1).when(menuControlSpy).readISBN();
         menuControlSpy.performActionBasedOnChoice(menuControlSpy.validateMenuOption(menuControlSpy.readChoice()));
-        menuControlSpy.performActionBasedOnChoice(menuControlSpy.validateMenuOption(menuControlSpy.readChoice()));
-        verify(menuControlSpy,times(2)).reserveBook();
+        verify(menuControlSpy).reserveBook();
     }
 
     @Test

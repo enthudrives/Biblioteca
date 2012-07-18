@@ -13,20 +13,30 @@ import org.junit.Test;
  */
 public class BookControlTest {
     @Test
-    public void viewAllBooksTest()
+    public void testIfAllBookNamesAreReturned()
     {
         BookControl bookControl=new BookControl();
         bookControl.createBooks();
         String expected="1. Eat, Pray, Love, by Elizabeth Gilbert\n2. One moment, by McBride Kristina\n3. The power of Habit, by Duhigg Charles\n";
         Assert.assertEquals(bookControl.getBooksNames(), expected);
     }
+    
     @Test
-    public void reserveBookTest()
+    public void testIfSuccessMessageIsReturnedWhenBookIsReservedSuccessfully()
     {
         BookControl bookControl=new BookControl();
         bookControl.createBooks();
         MenuControl menuControl=new MenuControl();
         Assert.assertEquals(bookControl.reserveBook(3, menuControl.successMessage, menuControl.failureMessage),menuControl.successMessage);
+    }
+
+    @Test
+    public void testIfFailureMessageIsReturnedWhenBookIsNotAvailable()
+    {
+        BookControl bookControl=new BookControl();
+        bookControl.createBooks();
+        MenuControl menuControl=new MenuControl();
+        bookControl.reserveBook(3,menuControl.successMessage,menuControl.failureMessage);
         Assert.assertEquals(bookControl.reserveBook(3, menuControl.successMessage, menuControl.failureMessage), menuControl.failureMessage);
     }
 
