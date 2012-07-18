@@ -14,9 +14,12 @@ public class MenuControl {
     BookControl bookControl =new BookControl();
     String successMessage="Thank You! Enjoy the Book.";
     String failureMessage="Sorry we don't have that book yet.";
-    public void loadScreen()
+    public MenuControl()
     {
         bookControl.createBooks();
+    }
+    public void loadScreen()
+    {
         while (true)
         {
         System.out.println(welcomeMessage());
@@ -37,7 +40,7 @@ public class MenuControl {
                 reserveBook();
                 break;
             case 3:
-                System.out.println(Biblioteca.checkLibraryNumber());
+                System.out.println(checkLibraryNumber());
                 break;
             case 4:
                 System.exit(1);
@@ -51,12 +54,21 @@ public class MenuControl {
 
     void reserveBook() {
         System.out.print("Enter the ISDN :");
-        int choice= readChoice();
+        int choice= readISDN();
        System.out.println(bookControl.reserveBook(choice,successMessage,failureMessage));
     }
 
-    int readChoice() {
+    int readISDN() {
+        return readChoice();
+    }
 
+    public String checkLibraryNumber() {
+        return "Please talk to Librarian. Thank you.";
+    }
+
+
+    int readChoice() {
+                 System.out.print("WHAT?");
         int choice=0;
         try
         {

@@ -49,13 +49,32 @@ public class MenuControlTest
     @Test
     public void shouldDisplyBookNamesWhenUserSelectsOneTest()
     {
-        MenuControl menuControl=mock(MenuControl.class);
-        when(menuControl.readChoice()).thenReturn(1);
-        new MenuControl().performActionBasedOnChoice(menuControl.readChoice());
-        verify(menuControl).readChoice();
-        //verify(menuControl).displayAllBooksNames();
-
+        MenuControl menuControl = new MenuControl();
+        MenuControl menuControlSpy = spy(menuControl);
+        doReturn(1).when(menuControlSpy).readChoice();
+        menuControlSpy.performActionBasedOnChoice(menuControlSpy.validateMenuOption(menuControlSpy.readChoice()));
+        verify(menuControlSpy).displayAllBooksNames();
+    }
+    @Test
+    public void shouldReserveBookWhenUserSelectsTwo()
+    {
+        MenuControl menuControl = new MenuControl();
+        MenuControl menuControlSpy = spy(menuControl);
+        doReturn(2).when(menuControlSpy).readChoice();
+        doReturn(1).when(menuControlSpy).readISDN();
+        menuControlSpy.performActionBasedOnChoice(menuControlSpy.validateMenuOption(menuControlSpy.readChoice()));
+        menuControlSpy.performActionBasedOnChoice(menuControlSpy.validateMenuOption(menuControlSpy.readChoice()));
+        verify(menuControlSpy,times(2)).reserveBook();
     }
 
+    @Test
+    public void shouldDisplyTalkToLibrarianWhenAskedToCheckLibraryNumber()
+    {
+        MenuControl menuControl = new MenuControl();
+        MenuControl menuControlSpy = spy(menuControl);
+        doReturn(3).when(menuControlSpy).readChoice();
+        menuControlSpy.performActionBasedOnChoice(menuControlSpy.validateMenuOption(menuControlSpy.readChoice()));
+        verify(menuControlSpy).checkLibraryNumber();
+    }
 
 }

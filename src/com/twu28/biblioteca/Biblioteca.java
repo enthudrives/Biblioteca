@@ -10,14 +10,11 @@ package com.twu28.biblioteca;
 
 public class Biblioteca
 {
-    private static MenuControl menu=new MenuControl();
+    private static MenuControl menuControl=new MenuControl();
 
-    public static String checkLibraryNumber() {
-        return "Please talk to Librarian. Thank you.";
-    }
 
     public static void main(String[] args)
     {
-            menu.loadScreen();
+            menuControl.loadScreen();
     }
 }

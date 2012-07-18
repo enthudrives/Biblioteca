@@ -12,9 +12,5 @@ import org.junit.Test;
  * To change this template use File | Settings | File Templates.
  */
 public class BibliotecaTest {
-    @Test
-    public void checkLibraryNumberTest()
-    {
-        Assert.assertEquals(Biblioteca.checkLibraryNumber(), "Please talk to Librarian. Thank you.");
-    }
+
 }

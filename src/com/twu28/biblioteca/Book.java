@@ -17,7 +17,7 @@ public class Book {
         isdn=number;
         title=name;
         author=auth;
-        available=true;// available=false => reserved
+        available=true;
     }
     @Override
     public String toString()
