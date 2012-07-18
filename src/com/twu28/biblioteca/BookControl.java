@@ -1,7 +1,6 @@
 package com.twu28.biblioteca;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
 
 /**
  * Created with IntelliJ IDEA.
@@ -12,22 +11,22 @@ import java.util.Map;
  */
 public class BookControl {
 
-    Map<Integer, Book> book= new HashMap<Integer, Book>();  //Using ISDN as key to store books
+    ArrayList<Book> books =new ArrayList<Book>();
 
     public void createBooks() {
-        book.put(1,new Book(1,"Eat, Pray, Love", "Elizabeth Gilbert"));
-        book.put(2,new Book(2,"One moment","McBride Kristina"));
-        book.put(3,new Book(3,"The power of Habit","Duhigg Charles"));
+        books.add(new Book(1, "Eat, Pray, Love", "Elizabeth Gilbert"));
+        books.add(new Book(2, "One moment", "McBride Kristina"));
+        books.add(new Book(3, "The power of Habit", "Duhigg Charles"));
     }
 
-    public String reserveBook(int isdn, String successMessage, String failureMessage)
+    public String reserveBook(int id, String successMessage, String failureMessage)
     {
-
-        if(book.containsKey(isdn))
+        int bookIndex=id-1;
+        if(id<=books.size())
         {
-            if(book.get(isdn).isAvailable())
+            if(books.get(bookIndex).isAvailable())
             {
-                book.get(isdn).setAvailable(false);
+                books.get(bookIndex).setAvailable(false);
                 return successMessage;
             }
         }
@@ -36,9 +35,9 @@ public class BookControl {
 
     public String getBooksNames() {
         String booklist="";
-        for(Book b:book.values())
+        for(Book book: books)
         {
-            booklist+=b.toString()+"\n";
+            booklist+=book.toString()+"\n";
         }
         return booklist;
     }

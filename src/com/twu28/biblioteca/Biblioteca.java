@@ -10,11 +10,9 @@ package com.twu28.biblioteca;
 
 public class Biblioteca
 {
-    private static MenuControl menuControl=new MenuControl();
-
-
     public static void main(String[] args)
     {
-            menuControl.loadScreen();
+        MenuControl menuControl=new MenuControl();
+        menuControl.loadScreen();
     }
 }

@@ -13,11 +13,14 @@ import java.util.Scanner;
 public class MenuControl {
     BookControl bookControl =new BookControl();
     String successMessage="Thank You! Enjoy the Book.";
-    String failureMessage="Sorry we don't have that book yet.";
+    String failureMessage="Sorry we don't have that books yet.";
+    String talkToLibrarianMessage="Please talk to Librarian. Thank you.";
+
     public MenuControl()
     {
         bookControl.createBooks();
     }
+
     public void loadScreen()
     {
         while (true)
@@ -53,22 +56,21 @@ public class MenuControl {
     }
 
     void reserveBook() {
-        System.out.print("Enter the ISDN :");
-        int choice= readISDN();
+        System.out.print("Enter the ISBN :");
+        int choice= readISBN();
        System.out.println(bookControl.reserveBook(choice,successMessage,failureMessage));
     }
 
-    int readISDN() {
+    int readISBN() {
         return readChoice();
     }
 
     public String checkLibraryNumber() {
-        return "Please talk to Librarian. Thank you.";
+        return talkToLibrarianMessage;
     }
 
 
     int readChoice() {
-                 System.out.print("WHAT?");
         int choice=0;
         try
         {

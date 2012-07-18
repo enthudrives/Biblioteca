@@ -2,7 +2,6 @@ package com.twu28.biblioteca;
 
 import junit.framework.Assert;
 import org.junit.Test;
-import org.mockito.Mockito;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
@@ -55,20 +54,28 @@ public class MenuControlTest
         menuControlSpy.performActionBasedOnChoice(menuControlSpy.validateMenuOption(menuControlSpy.readChoice()));
         verify(menuControlSpy).displayAllBooksNames();
     }
+
     @Test
     public void shouldReserveBookWhenUserSelectsTwo()
     {
         MenuControl menuControl = new MenuControl();
         MenuControl menuControlSpy = spy(menuControl);
         doReturn(2).when(menuControlSpy).readChoice();
-        doReturn(1).when(menuControlSpy).readISDN();
+        doReturn(1).when(menuControlSpy).readISBN();
         menuControlSpy.performActionBasedOnChoice(menuControlSpy.validateMenuOption(menuControlSpy.readChoice()));
         menuControlSpy.performActionBasedOnChoice(menuControlSpy.validateMenuOption(menuControlSpy.readChoice()));
         verify(menuControlSpy,times(2)).reserveBook();
     }
 
     @Test
-    public void shouldDisplyTalkToLibrarianWhenAskedToCheckLibraryNumber()
+    public void shouldDisplayTalkToLibrarianWhenCheckLibraryNumberIsCalled()
+    {
+        MenuControl menuControl=new MenuControl();
+        assertEquals(menuControl.checkLibraryNumber(), menuControl.talkToLibrarianMessage);
+    }
+
+    @Test
+    public void shouldCheckLibraryNumberWhenUserSelectsThree()
     {
         MenuControl menuControl = new MenuControl();
         MenuControl menuControlSpy = spy(menuControl);
@@ -76,5 +83,4 @@ public class MenuControlTest
         menuControlSpy.performActionBasedOnChoice(menuControlSpy.validateMenuOption(menuControlSpy.readChoice()));
         verify(menuControlSpy).checkLibraryNumber();
     }
-
 }

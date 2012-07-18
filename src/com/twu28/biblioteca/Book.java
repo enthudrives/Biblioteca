@@ -8,13 +8,13 @@ package com.twu28.biblioteca;
  * To change this template use File | Settings | File Templates.
  */
 public class Book {
-    int isdn;
+    int id;
     String title, author;
     Boolean available;
 
 
     public Book(int number, String name, String auth) {
-        isdn=number;
+        id =number;
         title=name;
         author=auth;
         available=true;
@@ -22,7 +22,7 @@ public class Book {
     @Override
     public String toString()
     {
-        return isdn + ". " + title + ", by " + author;
+        return id + ". " + title + ", by " + author;
     }
 
     public boolean isAvailable() {
