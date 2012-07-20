@@ -46,40 +46,80 @@ public class MenuControlTest
     }
 
     @Test
-    public void shouldDisplyBookNamesWhenUserSelectsOneTest()
+    public void shouldCallDisplayBookNamesWhenUserSelectsOneTest()
     {
-        MenuControl menuControl = new MenuControl();
-        MenuControl menuControlSpy = spy(menuControl);
+        MenuControl menuControl=new MenuControl();
+        BookControl bookControl=mock(BookControl.class);
+        menuControl.setBookControl(bookControl);
+
+        menuControl.performActionBasedOnChoice(1);
+        verify(bookControl).getBooksNames();
+    }
+
+    @Test
+    public void shouldCallReserveBookWhenUserSelectsTwo()
+    {
+        MenuControl menuControl=new MenuControl();
+        MenuControl menuControlSpy=spy(menuControl);
         doReturn(1).when(menuControlSpy).readChoice();
-        menuControlSpy.performActionBasedOnChoice(menuControlSpy.validateMenuOption(menuControlSpy.readChoice()));
-        verify(menuControlSpy).displayAllBooksNames();
+
+        BookControl bookControl=mock(BookControl.class);
+        menuControlSpy.setBookControl(bookControl);
+
+        menuControlSpy.performActionBasedOnChoice(2);
+        verify(bookControl).reserveBook(1, menuControlSpy.successMessage, menuControlSpy.failureMessage);
     }
 
     @Test
-    public void shouldReserveBookWhenUserSelectsTwo()
-    {
-        MenuControl menuControl = new MenuControl();
-        MenuControl menuControlSpy = spy(menuControl);
-        doReturn(2).when(menuControlSpy).readChoice();
-        doReturn(1).when(menuControlSpy).readISBN();
-        menuControlSpy.performActionBasedOnChoice(menuControlSpy.validateMenuOption(menuControlSpy.readChoice()));
-        verify(menuControlSpy).reserveBook();
-    }
-
-    @Test
-    public void shouldDisplayTalkToLibrarianWhenCheckLibraryNumberIsCalled()
+    public void shouldDisplayTalkToLibrarianIfUserIsNotLoggedInWhenCheckLibraryNumberIsCalled()
     {
         MenuControl menuControl=new MenuControl();
         assertEquals(menuControl.checkLibraryNumber(), menuControl.talkToLibrarianMessage);
     }
 
     @Test
-    public void shouldCheckLibraryNumberWhenUserSelectsThree()
+    public void shouldDisplayUsersLibraryNumberIfLoggedInWhenCheckLibraryNumberIsCalled()
     {
-        MenuControl menuControl = new MenuControl();
-        MenuControl menuControlSpy = spy(menuControl);
-        doReturn(3).when(menuControlSpy).readChoice();
-        menuControlSpy.performActionBasedOnChoice(menuControlSpy.validateMenuOption(menuControlSpy.readChoice()));
-        verify(menuControlSpy).checkLibraryNumber();
+        MenuControl menuControl=new MenuControl();
+        UserControl userControl=new UserControl();
+        userControl.authenticate(new User("111-1111","password"));
+        menuControl.setUserControl(userControl);
+
+        assertEquals("111-1111",menuControl.checkLibraryNumber());
+    }
+    @Test
+    public void shouldCallCheckLibraryNumberWhenUserSelectsThree()
+    {
+        MenuControl menuControl=mock(MenuControl.class);
+
+        doCallRealMethod().when(menuControl).performActionBasedOnChoice(3);
+
+        menuControl.performActionBasedOnChoice(3);
+        verify(menuControl).checkLibraryNumber();
+    }
+
+    @Test
+    public void shouldCallDisplayAllMovieNamesWhenUserSelectsFourTest()
+    {
+        MenuControl menuControl=new MenuControl();
+        MovieControl movieControl=mock(MovieControl.class);
+        menuControl.setMovieControl(movieControl);
+
+        menuControl.performActionBasedOnChoice(4);
+        verify(movieControl).listMovies();
+    }
+    @Test
+    public void shouldAuthenticateUserWhenUserSelectsFive()
+    {
+        MenuControl menuControl=new MenuControl();
+        MenuControl menuControlSpy=spy(menuControl);
+
+        UserControl userControl=mock(UserControl.class);
+        menuControlSpy.setUserControl(userControl);
+
+        User user=new User("111-1111","password");
+        doReturn(user).when(menuControlSpy).readUser();
+        menuControlSpy.performActionBasedOnChoice(5);
+        verify(userControl).authenticate(user);
     }
 }
