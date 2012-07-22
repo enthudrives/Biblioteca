@@ -13,10 +13,6 @@ import static org.junit.Assert.assertEquals;
  * To change this template use File | Settings | File Templates.
  */
 public class MovieControlTest {
-    @Before
-    public void setUp() throws Exception {
-
-    }
 
     @Test
     public void shouldListAllMovieNamesWithDirectorNamesAndRating()

@@ -27,11 +27,6 @@ public class User
 
             return false;
     }
-    @Override
-    public String toString()
-    {
-        return username+" "+password;
-    }
 
     public boolean isLoggedIn() {
         return this.loggedIn;
@@ -43,9 +38,5 @@ public class User
 
     public String getUserName() {
         return username;
-    }
-
-    public void setUserName(String userName) {
-        this.username = userName;
     }
 }

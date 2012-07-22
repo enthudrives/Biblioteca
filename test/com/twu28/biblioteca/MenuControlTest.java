@@ -1,6 +1,7 @@
 package com.twu28.biblioteca;
 
 import junit.framework.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import static junit.framework.Assert.assertEquals;
@@ -19,18 +20,24 @@ import static org.mockito.Mockito.*;
  */
 public class MenuControlTest
 {
+    MenuControl menuControl;
+
+    @Before
+    public void setUp() throws Exception {
+          menuControl=new MenuControl();
+    }
 
     @Test
     public void shouldDisplayWelcomeMessageAndMenuTest()
     {
-        String message=new MenuControl().welcomeMessage();
+        String message=menuControl.welcomeMessage();
         Assert.assertTrue(message.contains("Welcome") && message.contains("Menu"));
     }
 
     @Test
     public void customerSelectsValidOptionFromMenuTest()
     {
-        MenuControl menuControl=mock(MenuControl.class);
+        menuControl=mock(MenuControl.class);
         when(menuControl.readChoice()).thenReturn(1);
         assertNotSame((new MenuControl().validateMenuOption(menuControl.readChoice())), 0);
         verify(menuControl).readChoice();
@@ -39,7 +46,7 @@ public class MenuControlTest
     @Test
     public void customerSelectsInvalidOptionFromMenuTest()
     {
-        MenuControl menuControl=mock(MenuControl.class);
+        menuControl=mock(MenuControl.class);
         when(menuControl.readChoice()).thenReturn(6);
         assertEquals((new MenuControl().validateMenuOption(menuControl.readChoice())), 0);
         verify(menuControl).readChoice();
@@ -48,7 +55,6 @@ public class MenuControlTest
     @Test
     public void shouldCallDisplayBookNamesWhenUserSelectsOneTest()
     {
-        MenuControl menuControl=new MenuControl();
         BookControl bookControl=mock(BookControl.class);
         menuControl.setBookControl(bookControl);
 
@@ -59,7 +65,6 @@ public class MenuControlTest
     @Test
     public void shouldCheckIfUserIsLoggedInBeforeReservingBook()
     {
-        MenuControl menuControl=new MenuControl();
         User user=mock(User.class);
         menuControl.setCurrentUser(user);
         menuControl.performActionBasedOnChoice(2);
@@ -69,7 +74,6 @@ public class MenuControlTest
     @Test
     public void shouldCallReserveBookWhenUserSelectsTwo()
     {
-        MenuControl menuControl=new MenuControl();
         MenuControl menuControlSpy=spy(menuControl);
         User user=new User("guest","");
         user.setLoggedIn(true);
@@ -86,8 +90,8 @@ public class MenuControlTest
 
 
     @Test
-    public void shouldCheckIfUserIsLoggedInBeforeCheckingLibraryNumber() {
-        MenuControl menuControl=new MenuControl();
+    public void shouldCheckIfUserIsLoggedInBeforeCheckingLibraryNumber()
+    {
         User user=mock(User.class);
         menuControl.setCurrentUser(user);
         menuControl.performActionBasedOnChoice(3);
@@ -97,7 +101,7 @@ public class MenuControlTest
     @Test
     public void shouldCallCheckLibraryNumberWhenUserSelectsThree()
     {
-        MenuControl menuControl=mock(MenuControl.class);
+        menuControl=mock(MenuControl.class);
 
         doCallRealMethod().when(menuControl).performActionBasedOnChoice(3);
 
@@ -108,34 +112,31 @@ public class MenuControlTest
     @Test
     public void shouldDisplayUsersLibraryNumberIfLoggedInWhenCheckLibraryNumberIsCalled()
     {
-        MenuControl menuControl=new MenuControl();
-        User user=new User("guest","");
+        User user=new User("111-0000","");
         user.setLoggedIn(true);
         menuControl.setCurrentUser(user);
-        assertEquals("guest",menuControl.checkLibraryNumber());
+        assertEquals("111-0000",menuControl.checkLibraryNumber());
     }
 
     @Test
     public void shouldDisplayTalkToLibrarianIfNotLoggedInWhenCheckLibraryNumberIsCalled()
     {
-        MenuControl menuControl=new MenuControl();
         assertEquals(menuControl.talkToLibrarianMessage,menuControl.checkLibraryNumber());
     }
 
     @Test
     public void shouldCallDisplayAllMovieNamesWhenUserSelectsFourTest()
     {
-        MenuControl menuControl=new MenuControl();
         MovieControl movieControl=mock(MovieControl.class);
         menuControl.setMovieControl(movieControl);
 
         menuControl.performActionBasedOnChoice(4);
         verify(movieControl).listMovies();
     }
+
     @Test
     public void shouldAuthenticateUserWhenUserSelectsFive()
     {
-        MenuControl menuControl=new MenuControl();
         MenuControl menuControlSpy=spy(menuControl);
 
         UserControl userControl=mock(UserControl.class);

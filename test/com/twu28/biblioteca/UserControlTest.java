@@ -1,7 +1,9 @@
 package com.twu28.biblioteca;
 
+import org.junit.Before;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -14,26 +16,28 @@ import static org.junit.Assert.assertTrue;
  */
 public class UserControlTest
 {
+    UserControl userControl;
+    @Before
+    public void setUp() throws Exception {
+        userControl=new UserControl();
+    }
+
     @Test
     public void shouldCheckIfUserIsNotAuthenticatedWhenWrongUsernameIsEntered()
     {
-        UserControl userControl=new UserControl();
         assertFalse(userControl.authenticate(new User("101-1111", "password")));
     }
 
     @Test
     public void shouldCheckIfUserIsNotAuthenticatedWhenWrongPasswordIsEntered()
     {
-        UserControl userControl=new UserControl();
         assertFalse(userControl.authenticate(new User("111-1111", "passwd")));
     }
 
     @Test
     public void shouldCheckIfThePasswordMatchesWithTheUsername()
     {
-        UserControl userControl=new UserControl();
         assertTrue(userControl.authenticate(new User("111-1111", "password")));
     }
-
 
 }

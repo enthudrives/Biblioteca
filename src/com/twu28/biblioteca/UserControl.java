@@ -33,8 +33,4 @@ public class UserControl
         }
         return status;
     }
-
-    public String getUserName(User user) {
-        return user.username;
-    }
 }
