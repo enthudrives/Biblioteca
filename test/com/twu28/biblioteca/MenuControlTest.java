@@ -40,7 +40,7 @@ public class MenuControlTest
     public void customerSelectsInvalidOptionFromMenuTest()
     {
         MenuControl menuControl=mock(MenuControl.class);
-        when(menuControl.readChoice()).thenReturn(5);
+        when(menuControl.readChoice()).thenReturn(6);
         assertEquals((new MenuControl().validateMenuOption(menuControl.readChoice())), 0);
         verify(menuControl).readChoice();
     }
@@ -57,10 +57,24 @@ public class MenuControlTest
     }
 
     @Test
+    public void shouldCheckIfUserIsLoggedInBeforeReservingBook()
+    {
+        MenuControl menuControl=new MenuControl();
+        User user=mock(User.class);
+        menuControl.setCurrentUser(user);
+        menuControl.performActionBasedOnChoice(2);
+        verify(user).isLoggedIn();
+    }
+
+    @Test
     public void shouldCallReserveBookWhenUserSelectsTwo()
     {
         MenuControl menuControl=new MenuControl();
         MenuControl menuControlSpy=spy(menuControl);
+        User user=new User("guest","");
+        user.setLoggedIn(true);
+        menuControlSpy.setCurrentUser(user);
+
         doReturn(1).when(menuControlSpy).readChoice();
 
         BookControl bookControl=mock(BookControl.class);
@@ -70,23 +84,16 @@ public class MenuControlTest
         verify(bookControl).reserveBook(1, menuControlSpy.successMessage, menuControlSpy.failureMessage);
     }
 
-    @Test
-    public void shouldDisplayTalkToLibrarianIfUserIsNotLoggedInWhenCheckLibraryNumberIsCalled()
-    {
-        MenuControl menuControl=new MenuControl();
-        assertEquals(menuControl.checkLibraryNumber(), menuControl.talkToLibrarianMessage);
-    }
 
     @Test
-    public void shouldDisplayUsersLibraryNumberIfLoggedInWhenCheckLibraryNumberIsCalled()
-    {
+    public void shouldCheckIfUserIsLoggedInBeforeCheckingLibraryNumber() {
         MenuControl menuControl=new MenuControl();
-        UserControl userControl=new UserControl();
-        userControl.authenticate(new User("111-1111","password"));
-        menuControl.setUserControl(userControl);
-
-        assertEquals("111-1111",menuControl.checkLibraryNumber());
+        User user=mock(User.class);
+        menuControl.setCurrentUser(user);
+        menuControl.performActionBasedOnChoice(3);
+        verify(user).isLoggedIn();
     }
+
     @Test
     public void shouldCallCheckLibraryNumberWhenUserSelectsThree()
     {
@@ -96,6 +103,23 @@ public class MenuControlTest
 
         menuControl.performActionBasedOnChoice(3);
         verify(menuControl).checkLibraryNumber();
+    }
+
+    @Test
+    public void shouldDisplayUsersLibraryNumberIfLoggedInWhenCheckLibraryNumberIsCalled()
+    {
+        MenuControl menuControl=new MenuControl();
+        User user=new User("guest","");
+        user.setLoggedIn(true);
+        menuControl.setCurrentUser(user);
+        assertEquals("guest",menuControl.checkLibraryNumber());
+    }
+
+    @Test
+    public void shouldDisplayTalkToLibrarianIfNotLoggedInWhenCheckLibraryNumberIsCalled()
+    {
+        MenuControl menuControl=new MenuControl();
+        assertEquals(menuControl.talkToLibrarianMessage,menuControl.checkLibraryNumber());
     }
 
     @Test
@@ -122,4 +146,5 @@ public class MenuControlTest
         menuControlSpy.performActionBasedOnChoice(5);
         verify(userControl).authenticate(user);
     }
+
 }

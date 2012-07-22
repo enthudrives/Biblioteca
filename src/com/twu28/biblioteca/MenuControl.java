@@ -20,6 +20,7 @@ When user enters 3,
 public class MenuControl {
     BookControl bookControl;
     UserControl userControl;
+    User currentUser;
     String successMessage="Thank You! Enjoy the Book.";
     String failureMessage="Sorry we don't have that books yet.";
     String talkToLibrarianMessage="Please talk to Librarian. Thank you.";
@@ -30,6 +31,7 @@ public class MenuControl {
         setBookControl(new BookControl());
         setMovieControl(new MovieControl());
         setUserControl(new UserControl());
+        currentUser=new User("guest","");
         bookControl.createBooks();
     }
     public void setMovieControl(MovieControl movieControl)
@@ -64,7 +66,10 @@ public class MenuControl {
                 displayAllBooksNames();
                 break;
             case 2:
-                reserveBook();
+                if(currentUser.isLoggedIn())
+                    reserveBook();
+                else
+                    System.out.print("You should be logged in to do this!");
                 break;
             case 3:
                 System.out.println(checkLibraryNumber());
@@ -73,14 +78,21 @@ public class MenuControl {
                 displayAllMovieNames();
                 break;
             case 5:
-                login();
+                if(currentUser.isLoggedIn())
+                    System.out.print("You are already logged in");
+                else
+                    login();
                 break;
         }
     }
 
     void login() {
-        if(userControl.authenticate(readUser()))
+        User user=readUser();
+        if(userControl.authenticate(user))
+        {
             System.out.println("Logged In Successfully!");
+            setCurrentUser(user);
+        }
         else
             System.out.print("Log in failed. Incorrect Username or Password");
     }
@@ -115,8 +127,8 @@ public class MenuControl {
 
 
     public String checkLibraryNumber() {
-        if(userControl.isLoggedIn())
-            return userControl.getCurrentUserName();
+        if(currentUser.isLoggedIn())
+            return currentUser.getUserName();
         return talkToLibrarianMessage;
     }
 
@@ -145,5 +157,9 @@ public class MenuControl {
             selected=0;
         }
         return selected;
+    }
+
+    public void setCurrentUser(User currentUser) {
+        this.currentUser = currentUser;
     }
 }

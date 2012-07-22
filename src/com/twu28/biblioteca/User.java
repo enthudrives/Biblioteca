@@ -10,10 +10,13 @@ package com.twu28.biblioteca;
 public class User
 {
     String username, password;
+    private boolean loggedIn;
+
     public User(String uname, String pwd)
     {
         username=uname;
         password=pwd;
+        loggedIn=false;
     }
     @Override
     public boolean equals(Object obj)
@@ -28,5 +31,21 @@ public class User
     public String toString()
     {
         return username+" "+password;
+    }
+
+    public boolean isLoggedIn() {
+        return this.loggedIn;
+    }
+
+    public void setLoggedIn(boolean loggedIn) {
+        this.loggedIn = loggedIn;
+    }
+
+    public String getUserName() {
+        return username;
+    }
+
+    public void setUserName(String userName) {
+        this.username = userName;
     }
 }

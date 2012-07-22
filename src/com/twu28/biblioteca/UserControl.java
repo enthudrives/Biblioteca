@@ -11,7 +11,7 @@ import java.util.ArrayList;
  */
 public class UserControl
 {
-    User currentUser=null;
+   // User currentUser=null;
     ArrayList<User> users=new ArrayList<User>();
     public UserControl()
     {
@@ -26,21 +26,15 @@ public class UserControl
         {
             if(user.equals(user1))
                 {
+                    user.setLoggedIn(true);
                     status=true;
-                    currentUser=user;
                     break;
                 }
         }
         return status;
     }
 
-    public boolean isLoggedIn() {
-        if(currentUser!=null)
-            return true;
-        return false;
-    }
-
-    public String getCurrentUserName() {
-        return currentUser.username;
+    public String getUserName(User user) {
+        return user.username;
     }
 }
