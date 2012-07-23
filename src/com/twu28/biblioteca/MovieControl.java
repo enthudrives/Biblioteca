@@ -8,23 +8,13 @@ import java.util.ArrayList;
  * Time: 1:23 AM
  * To change this template use File | Settings | File Templates.
  */
-public class MovieControl {
-    ArrayList<Movie> movies=new ArrayList<Movie>();
-
+public class MovieControl extends EntityControl{
     public MovieControl()
     {
-            movies.add(new Movie("Titanic", "James Cameron",9 ));
-            movies.add(new Movie("Casablanca", "Michael Curtiz",8 ));
-            movies.add(new Movie("Avatar", "James Cameron",8 ));
-            movies.add(new Movie("Remember Me", "Allen Coulter",7));
-            movies.add(new Movie("The Dark Knight Rises", "Christopher Nolan"));
-    }
-
-    public String listMovies()
-    {
-        String movielist="";
-        for(Movie movie:movies)
-            movielist+=movie.toString()+"\n";
-        return movielist;
+            list.add(new Movie(1, "Titanic", "James Cameron", 9));
+            list.add(new Movie(2, "Casablanca", "Michael Curtiz", 8));
+            list.add(new Movie(3, "Avatar", "James Cameron", 8));
+            list.add(new Movie(4, "Remember Me", "Allen Coulter", 7));
+            list.add(new Movie(5, "The Dark Knight Rises", "Christopher Nolan"));
     }
 }

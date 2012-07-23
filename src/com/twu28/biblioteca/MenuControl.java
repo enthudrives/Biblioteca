@@ -20,19 +20,17 @@ When user enters 3,
 public class MenuControl {
     BookControl bookControl;
     UserControl userControl;
-    User currentUser;
-    String successMessage="Thank You! Enjoy the Book.";
-    String failureMessage="Sorry we don't have that books yet.";
-    String talkToLibrarianMessage="Please talk to Librarian. Thank you.";
-    private MovieControl movieControl;
+    User currentUser=null;
+    public static final String SUCCESS_MESSAGE ="Thank You! Enjoy the Book.";
+    public static final String FAILURE_MESSAGE ="Sorry we don't have that book yet.";
+    public static final String TALK_TO_LIBRARIAN_MESSAGE ="Please talk to Librarian. Thank you.";
+    MovieControl movieControl;
 
     public MenuControl()
     {
         setBookControl(new BookControl());
         setMovieControl(new MovieControl());
         setUserControl(new UserControl());
-        currentUser=new User("guest","");
-        bookControl.createBooks();
     }
     public void setMovieControl(MovieControl movieControl)
     {
@@ -66,7 +64,7 @@ public class MenuControl {
                 displayAllBooksNames();
                 break;
             case 2:
-                if(currentUser.isLoggedIn())
+                if(currentUser!=null)
                     reserveBook();
                 else
                     System.out.print("You should be logged in to do this!");
@@ -78,7 +76,7 @@ public class MenuControl {
                 displayAllMovieNames();
                 break;
             case 5:
-                if(currentUser.isLoggedIn())
+                if(currentUser!=null)
                     System.out.print("You are already logged in");
                 else
                     login();
@@ -112,24 +110,24 @@ public class MenuControl {
     }
 
     void displayAllMovieNames() {
-        System.out.print(movieControl.listMovies());
+        System.out.print(movieControl.getList());
     }
 
     void displayAllBooksNames() {
-        System.out.println(bookControl.getBooksNames());
+        System.out.println(bookControl.getList());
     }
 
     void reserveBook() {
         System.out.print("Enter the ISBN :");
         int choice= readChoice();
-       System.out.println(bookControl.reserveBook(choice,successMessage,failureMessage));
+       System.out.println(bookControl.reserve(choice, SUCCESS_MESSAGE, FAILURE_MESSAGE));
     }
 
 
     public String checkLibraryNumber() {
-        if(currentUser.isLoggedIn())
+        if(currentUser!=null)
             return currentUser.getUserName();
-        return talkToLibrarianMessage;
+        return TALK_TO_LIBRARIAN_MESSAGE;
     }
 
 
@@ -146,7 +144,7 @@ public class MenuControl {
 
     public String welcomeMessage()
     {
-        return "\n-----------------------------\n\tWelcome to Biblioteca\n-----------------------------\n Menu:\n 1.View books\n 2.Reserve \n 3.Check Library number \n 4.View Movies \n 5.Login\n Enter your choice :";
+        return "\n-----------------------------\n\tWelcome to Biblioteca\n-----------------------------\n Menu:\n 1.View Books\n 2.Reserve Books \n 3.Check Library number \n 4.View Movies \n 5.Login\n Enter your choice :";
     }
 
     public int validateMenuOption(int option) {

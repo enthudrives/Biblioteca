@@ -7,19 +7,20 @@ package com.twu28.biblioteca;
  * Time: 1:26 AM
  * To change this template use File | Settings | File Templates.
  */
-public class Movie
+public class Movie extends Entity
 {
-    String name,director;
+    String director;
     int rating;
 
-    public Movie(String title,String director)
+    public Movie(int id,String title,String director)
     {
-        this(title,director,0);
+        this(id,title,director,0);
     }
 
-    public Movie(String title,String director,int rating)
+    public Movie(int id,String title,String director,int rating)
     {
-        this.name=title;
+        this.id=id;
+        this.title =title;
         this.director=director;
         this.rating=rating;
     }
@@ -27,6 +28,6 @@ public class Movie
     @Override
     public String toString()
     {
-        return String.format(("%20s\t%20s\t"),name,director) + ((rating!=0)?(String.format("%d/10",rating)):("N/A"));
+        return id + ". " + title + ", by " + director+" Rating:"+ ((rating!=0)?(rating):("N/A"));
     }
 }

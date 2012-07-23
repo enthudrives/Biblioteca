@@ -7,29 +7,20 @@ package com.twu28.biblioteca;
  * Time: 4:13 PM
  * To change this template use File | Settings | File Templates.
  */
-public class Book {
-    int id;
-    String title, author;
-    Boolean available;
+public class Book extends Entity {
 
+    String author;
 
     public Book(int number, String name, String auth) {
         id =number;
         title=name;
         author=auth;
         available=true;
+        System.out.print("here?");
     }
     @Override
     public String toString()
     {
         return id + ". " + title + ", by " + author;
-    }
-
-    public boolean isAvailable() {
-        return available;
-    }
-
-    public void setAvailable(boolean b) {
-        available=b;
     }
 }

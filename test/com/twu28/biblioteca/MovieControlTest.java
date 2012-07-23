@@ -1,6 +1,4 @@
 package com.twu28.biblioteca;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -18,11 +16,11 @@ public class MovieControlTest {
     public void shouldListAllMovieNamesWithDirectorNamesAndRating()
     {
         MovieControl movieControl=new MovieControl();
-        String expected=String.format("%20s\t%20s\t9/10\n","Titanic","James Cameron")
-            +String.format("%20s\t%20s\t8/10\n","Casablanca", "Michael Curtiz")
-            +String.format("%20s\t%20s\t8/10\n","Avatar","James Cameron")
-            +String.format("%20s\t%20s\t7/10\n","Remember Me","Allen Coulter")
-            +String.format("%20s\t%20s\tN/A\n","The Dark Knight Rises","Christopher Nolan");
-        assertEquals(expected,movieControl.listMovies());
+        String expected="1. Titanic, by James Cameron Rating:9\n" +
+                "2. Casablanca, by Michael Curtiz Rating:8\n" +
+                "3. Avatar, by James Cameron Rating:8\n" +
+                "4. Remember Me, by Allen Coulter Rating:7\n" +
+                "5. The Dark Knight Rises, by Christopher Nolan Rating:N/A\n";
+        assertEquals(expected,movieControl.getList());
     }
 }
