@@ -20,24 +20,26 @@ public class UserControlTest
     @Before
     public void setUp() throws Exception {
         userControl=new UserControl();
+        userControl.addUser(new User("100-1111",""));
+        userControl.addUser(new User("100-1112",""));
     }
 
     @Test
     public void shouldCheckIfUserIsNotAuthenticatedWhenWrongUsernameIsEntered()
     {
-        assertFalse(userControl.authenticate(new User("101-1111", "password")));
+        assertFalse(userControl.authenticate(new User("100-1113", "")));
     }
 
     @Test
     public void shouldCheckIfUserIsNotAuthenticatedWhenWrongPasswordIsEntered()
     {
-        assertFalse(userControl.authenticate(new User("111-1111", "passwd")));
+        assertFalse(userControl.authenticate(new User("100-1111", "passwd")));
     }
 
     @Test
     public void shouldCheckIfThePasswordMatchesWithTheUsername()
     {
-        assertTrue(userControl.authenticate(new User("111-1111", "password")));
+        assertTrue(userControl.authenticate(new User("100-1111", "")));
     }
 
 }

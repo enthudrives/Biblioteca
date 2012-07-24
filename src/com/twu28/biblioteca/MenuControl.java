@@ -20,17 +20,22 @@ When user enters 3,
 public class MenuControl {
     BookControl bookControl;
     UserControl userControl;
+    MovieControl movieControl;
     User currentUser=null;
     public static final String SUCCESS_MESSAGE ="Thank You! Enjoy the Book.";
     public static final String FAILURE_MESSAGE ="Sorry we don't have that book yet.";
     public static final String TALK_TO_LIBRARIAN_MESSAGE ="Please talk to Librarian. Thank you.";
-    MovieControl movieControl;
 
     public MenuControl()
     {
-        setBookControl(new BookControl());
-        setMovieControl(new MovieControl());
-        setUserControl(new UserControl());
+        bookControl=new BookControl();
+        bookControl.createBooks();
+
+        movieControl=new MovieControl();
+        movieControl.createMovies();
+
+        userControl=new UserControl();
+        userControl.createUsers();
     }
     public void setMovieControl(MovieControl movieControl)
     {
@@ -120,7 +125,7 @@ public class MenuControl {
     void reserveBook() {
         System.out.print("Enter the ISBN :");
         int choice= readChoice();
-       System.out.println(bookControl.reserve(choice, SUCCESS_MESSAGE, FAILURE_MESSAGE));
+       System.out.println(bookControl.reserveBook(choice, SUCCESS_MESSAGE, FAILURE_MESSAGE));
     }
 
 

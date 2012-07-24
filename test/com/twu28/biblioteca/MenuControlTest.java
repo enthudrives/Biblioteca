@@ -70,29 +70,17 @@ public class MenuControlTest
         menuControl.performActionBasedOnChoice(2);
         verify(menuControl, never()).reserveBook();
     }
-    @Test
-    public void shouldCallReserveBookWhenUserIsLoggedIn()
-    {
-        menuControl=mock(MenuControl.class);
-        User user = new User("111-1022","");
-        doCallRealMethod().when(menuControl).setCurrentUser(user);
-        doCallRealMethod().when(menuControl).performActionBasedOnChoice(2);
-        menuControl.setCurrentUser(user);
-        menuControl.performActionBasedOnChoice(2);
-        verify(menuControl).reserveBook();
-    }
 
     @Test
-    public void shouldCallReserveBookWhenUserSelectsTwo()
+    public void shouldCallReserveBookWhenUserSelectsTwoIfLoggedIn()
     {
         MenuControl menuControlSpy=spy(menuControl);
-        User user=new User("111-1202","");
-        menuControlSpy.setCurrentUser(user);
-        doReturn(1).when(menuControlSpy).readChoice();
+        menuControlSpy.setCurrentUser(new User("100-1000",""));
         BookControl bookControl=mock(BookControl.class);
         menuControlSpy.setBookControl(bookControl);
+        doReturn(1).when(menuControlSpy).readChoice();
         menuControlSpy.performActionBasedOnChoice(2);
-        verify(bookControl).reserve(1, MenuControl.SUCCESS_MESSAGE, MenuControl.FAILURE_MESSAGE);
+        verify(bookControl).reserveBook(1, MenuControl.SUCCESS_MESSAGE, MenuControl.FAILURE_MESSAGE);
     }
 
     @Test
@@ -107,9 +95,9 @@ public class MenuControlTest
     @Test
     public void shouldDisplayUsersLibraryNumberIfLoggedInWhenCheckLibraryNumberIsCalled()
     {
-        User user=new User("111-0000","");
+        User user=new User("100-1000","");
         menuControl.setCurrentUser(user);
-        assertEquals("111-0000",menuControl.checkLibraryNumber());
+        assertEquals("100-1000",menuControl.checkLibraryNumber());
     }
 
     @Test

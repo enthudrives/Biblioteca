@@ -15,9 +15,17 @@ public class UserControl
     ArrayList<User> users=new ArrayList<User>();
     public UserControl()
     {
-        users.add(new User("111-1111", "password"));
-        users.add(new User("111-1112", "password"));
-        users.add(new User("111-1113", "password"));
+        createUsers();
+    }
+
+    protected void createUsers() {
+        addUser(new User("111-1111","password"));
+        addUser(new User("111-1112","password"));
+        addUser(new User("111-1113","password"));
+    }
+
+    protected void addUser(User user) {
+        users.add(user);
     }
 
     public Boolean authenticate(User user) {

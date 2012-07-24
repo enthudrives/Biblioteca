@@ -16,7 +16,6 @@ public class Book extends Entity {
         title=name;
         author=auth;
         available=true;
-        System.out.print("here?");
     }
     @Override
     public String toString()

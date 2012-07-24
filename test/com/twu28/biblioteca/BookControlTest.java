@@ -16,27 +16,30 @@ public class BookControlTest {
     BookControl bookControl;
     @Before
     public void setUp() throws Exception {
-         bookControl=new BookControl();
+        bookControl=new BookControl();
+        bookControl.insertIntoList(new Book(1,"book1","author1"));
+        bookControl.insertIntoList(new Book(2,"book2","author2"));
+        bookControl.insertIntoList(new Book(3,"book3","author3"));
     }
 
     @Test
     public void testIfAllBookNamesAreReturned()
     {
-        String expected="1. Eat, Pray, Love, by Elizabeth Gilbert\n2. One moment, by McBride Kristina\n3. The power of Habit, by Duhigg Charles\n";
+        String expected="1. book1, by author1\n2. book2, by author2\n3. book3, by author3\n";
         Assert.assertEquals(bookControl.getList(), expected);
     }
     
     @Test
     public void testIfSuccessMessageIsReturnedWhenBookIsReservedSuccessfully()
     {
-        Assert.assertEquals(bookControl.reserve(3, MenuControl.SUCCESS_MESSAGE, MenuControl.FAILURE_MESSAGE),MenuControl.SUCCESS_MESSAGE);
+        Assert.assertEquals(bookControl.reserveBook(3, MenuControl.SUCCESS_MESSAGE, MenuControl.FAILURE_MESSAGE),MenuControl.SUCCESS_MESSAGE);
     }
 
     @Test
     public void testIfFailureMessageIsReturnedWhenBookIsNotAvailable()
     {
-        bookControl.reserve(3, MenuControl.SUCCESS_MESSAGE, MenuControl.FAILURE_MESSAGE);
-        Assert.assertEquals(bookControl.reserve(3, MenuControl.SUCCESS_MESSAGE, MenuControl.FAILURE_MESSAGE), MenuControl.FAILURE_MESSAGE);
+        bookControl.reserveBook(3, MenuControl.SUCCESS_MESSAGE, MenuControl.FAILURE_MESSAGE);
+        Assert.assertEquals(bookControl.reserveBook(3, MenuControl.SUCCESS_MESSAGE, MenuControl.FAILURE_MESSAGE), MenuControl.FAILURE_MESSAGE);
     }
 
 }

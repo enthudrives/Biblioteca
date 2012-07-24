@@ -12,6 +12,12 @@ import java.util.ArrayList;
 public class EntityControl
 {
     ArrayList<Entity> list =new ArrayList<Entity>();
+
+    protected void insertIntoList(Entity entity)
+    {
+        list.add(entity);
+    }
+
     protected String getList()
     {
         String entitylist="";

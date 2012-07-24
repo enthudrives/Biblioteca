@@ -16,11 +16,11 @@ public class MovieControlTest {
     public void shouldListAllMovieNamesWithDirectorNamesAndRating()
     {
         MovieControl movieControl=new MovieControl();
-        String expected="1. Titanic, by James Cameron Rating:9\n" +
-                "2. Casablanca, by Michael Curtiz Rating:8\n" +
-                "3. Avatar, by James Cameron Rating:8\n" +
-                "4. Remember Me, by Allen Coulter Rating:7\n" +
-                "5. The Dark Knight Rises, by Christopher Nolan Rating:N/A\n";
+        movieControl.insertIntoList(new Movie(1,"movie1", "director1",8));
+        movieControl.insertIntoList(new Movie(2,"movie2", "director2",7));
+        movieControl.insertIntoList(new Movie(3,"movie3", "director3"));
+        String expected="1. movie1, by director1 Rating:8\n" +"2. movie2, by director2 Rating:7\n"
+                +"3. movie3, by director3 Rating:N/A\n";
         assertEquals(expected,movieControl.getList());
     }
 }
