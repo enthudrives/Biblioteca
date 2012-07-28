@@ -1,4 +1,6 @@
-package com.twu28.biblioteca;
+package com.twu28.biblioteca.Controls;
+
+import com.twu28.biblioteca.Components.Entity;
 
 import java.util.ArrayList;
 
@@ -13,12 +15,12 @@ public class EntityControl
 {
     ArrayList<Entity> list =new ArrayList<Entity>();
 
-    protected void insertIntoList(Entity entity)
+    public void insertIntoList(Entity entity)
     {
         list.add(entity);
     }
 
-    protected String getList()
+    public String getList()
     {
         String entitylist="";
         for(Entity entity:list)

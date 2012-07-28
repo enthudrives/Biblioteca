@@ -1,6 +1,7 @@
-package com.twu28.biblioteca;
+package com.twu28.biblioteca.Controls;
 
-import java.util.ArrayList;
+import com.twu28.biblioteca.Components.Book;
+import com.twu28.biblioteca.Components.Entity;
 
 /**
  * Created with IntelliJ IDEA.
@@ -17,7 +18,7 @@ public class BookControl extends EntityControl{
         insertIntoList(new Book(3, "The power of Habit", "Duhigg Charles"));
     }
 
-    public String reserveBook(int id, String successMessage, String failureMessage)
+    public boolean reserveBook(int id)
     {
         int index=id-1;
         if(id<= list.size())
@@ -26,10 +27,10 @@ public class BookControl extends EntityControl{
             if(entity.isAvailable())
             {
                 entity.setAvailable(false);
-                return successMessage;
+                return true;
             }
         }
-        return  failureMessage;
+        return  true;
     }
 
 }

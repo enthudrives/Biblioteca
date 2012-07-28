@@ -1,5 +1,10 @@
 package com.twu28.biblioteca;
 
+import com.twu28.biblioteca.Components.User;
+import com.twu28.biblioteca.Controls.BookControl;
+import com.twu28.biblioteca.Controls.MenuControl;
+import com.twu28.biblioteca.Controls.MovieControl;
+import com.twu28.biblioteca.Controls.UserControl;
 import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -80,7 +85,7 @@ public class MenuControlTest
         menuControlSpy.setBookControl(bookControl);
         doReturn(1).when(menuControlSpy).readChoice();
         menuControlSpy.performActionBasedOnChoice(2);
-        verify(bookControl).reserveBook(1, MenuControl.SUCCESS_MESSAGE, MenuControl.FAILURE_MESSAGE);
+        verify(bookControl).reserveBook(1);
     }
 
     @Test

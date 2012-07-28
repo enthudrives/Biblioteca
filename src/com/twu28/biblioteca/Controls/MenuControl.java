@@ -1,4 +1,6 @@
-package com.twu28.biblioteca;
+package com.twu28.biblioteca.Controls;
+
+import com.twu28.biblioteca.Components.User;
 
 import java.util.Scanner;
 
@@ -62,7 +64,7 @@ public class MenuControl {
 
     }
 
-    void performActionBasedOnChoice(int choice) {
+    public void performActionBasedOnChoice(int choice) {
         switch (choice)
         {
             case 1:
@@ -100,7 +102,7 @@ public class MenuControl {
             System.out.print("Log in failed. Incorrect Username or Password");
     }
 
-    User readUser()
+    public User readUser()
     {
         System.out.println("Enter your username:");
         String uname=readString();
@@ -114,18 +116,18 @@ public class MenuControl {
         return new Scanner(System.in).next();
     }
 
-    void displayAllMovieNames() {
+    public void displayAllMovieNames() {
         System.out.print(movieControl.getList());
     }
 
-    void displayAllBooksNames() {
+    public void displayAllBooksNames() {
         System.out.println(bookControl.getList());
     }
 
-    void reserveBook() {
+    public void reserveBook() {
         System.out.print("Enter the ISBN :");
-        int choice= readChoice();
-       System.out.println(bookControl.reserveBook(choice, SUCCESS_MESSAGE, FAILURE_MESSAGE));
+        int isbn= readChoice();
+       System.out.println(bookControl.reserveBook(isbn));
     }
 
 

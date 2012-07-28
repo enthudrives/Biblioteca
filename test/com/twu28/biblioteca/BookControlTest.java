@@ -1,5 +1,7 @@
 package com.twu28.biblioteca;
 
+import com.twu28.biblioteca.Components.Book;
+import com.twu28.biblioteca.Controls.BookControl;
 import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -32,14 +34,14 @@ public class BookControlTest {
     @Test
     public void testIfSuccessMessageIsReturnedWhenBookIsReservedSuccessfully()
     {
-        Assert.assertEquals(bookControl.reserveBook(3, MenuControl.SUCCESS_MESSAGE, MenuControl.FAILURE_MESSAGE),MenuControl.SUCCESS_MESSAGE);
+        Assert.assertTrue(bookControl.reserveBook(3));
     }
 
     @Test
     public void testIfFailureMessageIsReturnedWhenBookIsNotAvailable()
     {
-        bookControl.reserveBook(3, MenuControl.SUCCESS_MESSAGE, MenuControl.FAILURE_MESSAGE);
-        Assert.assertEquals(bookControl.reserveBook(3, MenuControl.SUCCESS_MESSAGE, MenuControl.FAILURE_MESSAGE), MenuControl.FAILURE_MESSAGE);
+        bookControl.reserveBook(3);
+        Assert.assertFalse(bookControl.reserveBook(3));
     }
 
 }

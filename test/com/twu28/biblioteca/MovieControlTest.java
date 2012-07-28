@@ -1,4 +1,6 @@
 package com.twu28.biblioteca;
+import com.twu28.biblioteca.Components.Movie;
+import com.twu28.biblioteca.Controls.MovieControl;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

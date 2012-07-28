@@ -1,5 +1,7 @@
 package com.twu28.biblioteca;
 
+import com.twu28.biblioteca.Components.User;
+import com.twu28.biblioteca.Controls.UserControl;
 import org.junit.Before;
 import org.junit.Test;
 

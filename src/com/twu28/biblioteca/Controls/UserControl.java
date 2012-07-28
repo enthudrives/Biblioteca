@@ -1,4 +1,6 @@
-package com.twu28.biblioteca;
+package com.twu28.biblioteca.Controls;
+
+import com.twu28.biblioteca.Components.User;
 
 import java.util.ArrayList;
 
@@ -24,7 +26,7 @@ public class UserControl
         addUser(new User("111-1113","password"));
     }
 
-    protected void addUser(User user) {
+    public void addUser(User user) {
         users.add(user);
     }
 
