@@ -1,4 +1,4 @@
-package com.twu28.biblioteca.Components;
+package com.twu28.biblioteca.Entity;
 
 /**
  * Created with IntelliJ IDEA.

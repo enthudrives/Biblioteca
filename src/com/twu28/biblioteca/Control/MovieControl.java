@@ -1,5 +1,5 @@
-package com.twu28.biblioteca.Controls;
-import com.twu28.biblioteca.Components.Movie;
+package com.twu28.biblioteca.Control;
+import com.twu28.biblioteca.Entity.Movie;
 
 /**
  * Created with IntelliJ IDEA.

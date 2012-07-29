@@ -1,7 +1,7 @@
-package com.twu28.biblioteca.Controls;
+package com.twu28.biblioteca.Control;
 
-import com.twu28.biblioteca.Components.Book;
-import com.twu28.biblioteca.Components.Entity;
+import com.twu28.biblioteca.Entity.Book;
+import com.twu28.biblioteca.Entity.Entity;
 
 /**
  * Created with IntelliJ IDEA.

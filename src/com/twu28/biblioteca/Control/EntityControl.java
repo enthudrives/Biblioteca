@@ -1,6 +1,6 @@
-package com.twu28.biblioteca.Controls;
+package com.twu28.biblioteca.Control;
 
-import com.twu28.biblioteca.Components.Entity;
+import com.twu28.biblioteca.Entity.Entity;
 
 import java.util.ArrayList;
 

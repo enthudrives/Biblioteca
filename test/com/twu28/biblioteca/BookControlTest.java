@@ -1,7 +1,7 @@
 package com.twu28.biblioteca;
 
-import com.twu28.biblioteca.Components.Book;
-import com.twu28.biblioteca.Controls.BookControl;
+import com.twu28.biblioteca.Entity.Book;
+import com.twu28.biblioteca.Control.BookControl;
 import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;

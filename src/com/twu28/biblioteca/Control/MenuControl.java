@@ -1,6 +1,6 @@
-package com.twu28.biblioteca.Controls;
+package com.twu28.biblioteca.Control;
 
-import com.twu28.biblioteca.Components.User;
+import com.twu28.biblioteca.Entity.User;
 
 import java.util.Scanner;
 
